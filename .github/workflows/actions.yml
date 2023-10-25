@@ -1,0 +1,32 @@
+name: Run tests
+
+on: [push, pull_request]
+
+jobs:  
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Clone repo back
+      uses: actions/checkout@v2
+      with:
+        repository: lunaveira/backend_IntApp
+        path: backend_IntApp
+        ref: master
+
+    - name: install node
+      uses: actions/setup-node@v2-beta
+      with:
+          node-version: '12'
+      
+    - name: Access cloned repository content
+      run: |
+          echo "Rutas"
+          ls -la
+          echo "Pruebo levantar"
+          npm install
+          ls -la
+          echo "Ya instale"
+          npm install -g --force nodemon
+          echo "Ya instale npm"
+          nodemon src/index.js
